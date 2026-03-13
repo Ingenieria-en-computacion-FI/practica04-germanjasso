@@ -4,34 +4,43 @@
 int main() {
     printf("===== Repo de ejercicios de nodos =====\n");
 
-    // Ejercicio 1
     Nodo* n1 = crearNodo(10);
     if (n1) printf("Nodo creado con dato: %d\n", n1->dato);
 
-    // Ejercicio 2
     Nodo* arreglo = crearArregloNodos(5);
-    // TODO(1): imprimir arreglo
+    printf("Arreglo inicial (5 nodos): ");
+    for(int i = 0; i < 5; i++) printf("[%d] ", arreglo[i].dato);
+    printf("\n");
 
-    // Ejercicio 3
     int tam = 5;
     arreglo = agregarNodo(arreglo, &tam, 99);
-    // TODO(2): imprimir arreglo actualizado
+    printf("Arreglo actualizado (tam %d): ", tam);
+    for(int i = 0; i < tam; i++) printf("[%d] ", arreglo[i].dato);
+    printf("\n");
 
-    // Ejercicio 4
     liberarNodos(arreglo, tam);
     liberarNodos(n1, 1);
 
-    // Ejercicio 5
     Nodo* inicio = construirTresNodos();
-    // TODO(3): imprimir nodos
+    printf("Lista de 3 nodos: ");
+    Nodo* temp = inicio;
+    while(temp != NULL) {
+        printf("%d -> ", temp->dato);
+        temp = temp->siguiente;
+    }
+    printf("NULL\n");
 
-    // Ejercicio 6
     int total = contarNodos(inicio);
     printf("Total de nodos: %d\n", total);
 
-    // Ejercicio 7
     Nodo* desdeEntrada = crearNodosPorEntrada();
-    // TODO(4): imprimir nodos
+    printf("Lista desde entrada: ");
+    Nodo* temp2 = desdeEntrada;
+    while(temp2 != NULL) {
+        printf("%d -> ", temp2->dato);
+        temp2 = temp2->siguiente;
+    }
+    printf("NULL\n");
 
     return 0;
 }

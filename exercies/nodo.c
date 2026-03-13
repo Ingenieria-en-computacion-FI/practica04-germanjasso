@@ -2,43 +2,81 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Ejercicio 1 */
 Nodo* crearNodo(int valor){
-    // TODO(1): usar malloc
-    return NULL;
+    Nodo* nuevo = (Nodo*)malloc(sizeof(Nodo));
+    if (nuevo != NULL) {
+        nuevo->dato = valor;
+        nuevo->siguiente = NULL;
+    }
+    return nuevo;
 }
 
-/* Ejercicio 2 */
 Nodo* crearArregloNodos(int n){
-    // TODO(2): usar calloc
-    return NULL;
+    Nodo* array = (Nodo*)calloc(n, sizeof(Nodo));
+    return array;
 }
 
-/* Ejercicio 3 */
-Nodo* agregarNodo(Nodo* arreglo, int* n, int valor){
-    // TODO(3): usar realloc
-    return NULL;
+Nodo* agregarNodo(Nodo* array, int* n, int valor){
+    int nueva_cantidad = (*n) + 1;
+    Nodo* t = (Nodo*)realloc(array, nueva_cantidad * sizeof(Nodo));
+    
+    if (t != NULL) {
+        t[*n].dato = valor;
+        t[*n].siguiente = NULL;
+        *n = nueva_cantidad;
+        return t;
+    }
+    return array;
 }
 
-/* Ejercicio 4 */
-void liberarNodos(Nodo* arreglo, int n){
-    // TODO (4): liberar memoria
+void liberarNodos(Nodo* array, int n){
+    if (array != NULL) {
+        free(array);
+    }
 }
 
-/* Ejercicio 5 */
 Nodo* construirTresNodos(){
-    // TODO(5): crear 3 nodos enlazados manualmente
-    return NULL;
+    Nodo* n1 = crearNodo(10);
+    Nodo* n2 = crearNodo(20);
+    Nodo* n3 = crearNodo(30);
+
+    if (n1 != NULL) n1->siguiente = n2;
+    if (n2 != NULL) n2->siguiente = n3;
+    
+    return n1;
 }
 
-/* Ejercicio 6 */
 int contarNodos(Nodo* inicio){
-    // TODO(6): recorrer nodos
-    return 0;
+    int cont = 0;
+    Nodo* actual = inicio;
+    while (actual != NULL) {
+        cont++;
+        actual = actual->siguiente;
+    }
+    return cont;
 }
 
-/* Ejercicio 7 */
 Nodo* crearNodosPorEntrada(){
-    // TODO(7): leer números y crear nodos dinámicamente
-    return NULL;
+    int cantidad, valor;
+    Nodo *cabeza = NULL, *actual = NULL;
+
+    printf("¿Cuantos nodos quieres crear? ");
+    if (scanf("%d", &cantidad) != 1) return NULL;
+
+    for (int i = 0; i < cantidad; i++) {
+        printf("Valor para el nodo %d: ", i + 1);
+        scanf("%d", &valor);
+        
+        Nodo* nuevo = crearNodo(valor);
+        if (nuevo != NULL) {
+            if (cabeza == NULL) {
+                cabeza = nuevo;
+                actual = cabeza;
+            } else {
+                actual->siguiente = nuevo;
+                actual = nuevo;
+            }
+        }
+    }      
+    return cabeza;
 }
